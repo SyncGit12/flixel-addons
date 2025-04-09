@@ -1,6 +1,5 @@
 {
 	"[haxe]": {
-		"editor.formatOnSave": true,
-		"editor.formatOnSaveMode": "modifications"
+		"editor.formatOnSave": true
 	}
 }

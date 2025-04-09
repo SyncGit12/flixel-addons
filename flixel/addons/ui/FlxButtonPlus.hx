@@ -4,12 +4,12 @@ package flixel.addons.ui;
 import openfl.events.MouseEvent;
 import openfl.geom.Rectangle;
 import openfl.Lib;
-import flixel.addons.display.FlxExtendedMouseSprite;
+import flixel.addons.display.FlxExtendedSprite;
 import flixel.FlxCamera;
 import flixel.FlxG;
 import flixel.FlxSprite;
 import flixel.graphics.FlxGraphic;
-import flixel.group.*;
+import flixel.group.FlxSpriteGroup;
 import flixel.text.FlxText;
 import flixel.util.FlxColor;
 import flixel.util.FlxDestroyUtil;
@@ -24,7 +24,7 @@ import flixel.math.FlxMath;
  * @link http://www.photonstorm.com
  * @author Richard Davey / Photon Storm
  */
-class FlxButtonPlus extends #if (flixel < version("5.7.0")) FlxSpriteGroup #else FlxSpriteContainer #end
+class FlxButtonPlus extends FlxSpriteGroup
 {
 	public static inline var NORMAL:Int = 0;
 	public static inline var HIGHLIGHT:Int = 1;
@@ -60,8 +60,8 @@ class FlxButtonPlus extends #if (flixel < version("5.7.0")) FlxSpriteGroup #else
 	 */
 	public var leaveCallback:Void->Void;
 
-	public var buttonNormal(default, set):FlxExtendedMouseSprite;
-	public var buttonHighlight(default, set):FlxExtendedMouseSprite;
+	public var buttonNormal(default, set):FlxExtendedSprite;
+	public var buttonHighlight(default, set):FlxExtendedSprite;
 
 	public var textNormal(default, set):FlxText;
 	public var textHighlight(default, set):FlxText;
@@ -103,7 +103,7 @@ class FlxButtonPlus extends #if (flixel < version("5.7.0")) FlxSpriteGroup #else
 		y = Y;
 		onClickCallback = Callback;
 
-		buttonNormal = new FlxExtendedMouseSprite();
+		buttonNormal = new FlxExtendedSprite();
 
 		#if flash
 		buttonNormal.makeGraphic(Width, Height, borderColor);
@@ -116,7 +116,7 @@ class FlxButtonPlus extends #if (flixel < version("5.7.0")) FlxSpriteGroup #else
 		buttonNormal.solid = false;
 		buttonNormal.scrollFactor.set();
 
-		buttonHighlight = new FlxExtendedMouseSprite();
+		buttonHighlight = new FlxExtendedSprite();
 
 		#if flash
 		buttonHighlight.makeGraphic(Width, Height, borderColor);
@@ -382,7 +382,7 @@ class FlxButtonPlus extends #if (flixel < version("5.7.0")) FlxSpriteGroup #else
 		return NewText;
 	}
 
-	inline function set_buttonNormal(Value:FlxExtendedMouseSprite):FlxExtendedMouseSprite
+	inline function set_buttonNormal(Value:FlxExtendedSprite):FlxExtendedSprite
 	{
 		if (Value == null)
 		{
@@ -401,7 +401,7 @@ class FlxButtonPlus extends #if (flixel < version("5.7.0")) FlxSpriteGroup #else
 		return buttonNormal = Value;
 	}
 
-	inline function set_buttonHighlight(Value:FlxExtendedMouseSprite):FlxExtendedMouseSprite
+	inline function set_buttonHighlight(Value:FlxExtendedSprite):FlxExtendedSprite
 	{
 		if (Value == null)
 		{

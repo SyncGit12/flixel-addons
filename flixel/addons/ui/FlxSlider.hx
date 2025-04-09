@@ -3,20 +3,20 @@ package flixel.addons.ui;
 #if FLX_MOUSE
 import flixel.FlxG;
 import flixel.FlxSprite;
-import flixel.group.*;
+import flixel.group.FlxSpriteGroup;
+import flixel.text.FlxText;
+import flixel.util.FlxDestroyUtil;
 import flixel.math.FlxMath;
 import flixel.math.FlxPoint;
 import flixel.math.FlxRect;
-import flixel.text.FlxText;
-import flixel.util.FlxColor;
-import flixel.util.FlxDestroyUtil;
 import flixel.util.FlxSpriteUtil;
+import flixel.util.FlxColor;
 
 /**
  * A slider GUI element for float and integer manipulation.
  * @author Gama11
  */
-class FlxSlider extends #if (flixel < version("5.7.0")) FlxSpriteGroup #else FlxSpriteContainer #end
+class FlxSlider extends FlxSpriteGroup
 {
 	/**
 	 * The horizontal line in the background.
@@ -271,14 +271,7 @@ class FlxSlider extends #if (flixel < version("5.7.0")) FlxSpriteGroup #else Flx
 	override public function update(elapsed:Float):Void
 	{
 		// Clicking and sound logic
-		#if (flixel >= "5.7.0")
-		final cam = getDefaultCamera();
-		#else
-		final cam = this.camera;
-		#end
-		final mousePosition = FlxG.mouse.getViewPosition(cam);
-		
-		if (FlxMath.pointInFlxRect(mousePosition.x, mousePosition.y, _bounds))
+		if (FlxMath.mouseInFlxRect(false, _bounds))
 		{
 			if (hoverAlpha != 1)
 			{
@@ -296,7 +289,7 @@ class FlxSlider extends #if (flixel < version("5.7.0")) FlxSpriteGroup #else Flx
 
 			if (FlxG.mouse.pressed)
 			{
-				handle.x = mousePosition.x;
+				handle.x = FlxG.mouse.screenX;
 				updateValue();
 
 				#if FLX_SOUND_SYSTEM
@@ -323,7 +316,7 @@ class FlxSlider extends #if (flixel < version("5.7.0")) FlxSpriteGroup #else Flx
 		}
 
 		// Update the target value whenever the slider is being used
-		if ((FlxG.mouse.pressed) && (FlxMath.pointInFlxRect(mousePosition.x, mousePosition.y, _bounds)))
+		if ((FlxG.mouse.pressed) && (FlxMath.mouseInFlxRect(false, _bounds)))
 		{
 			updateValue();
 		}
@@ -342,9 +335,6 @@ class FlxSlider extends #if (flixel < version("5.7.0")) FlxSpriteGroup #else Flx
 
 		// Finally, update the valueLabel
 		valueLabel.text = Std.string(FlxMath.roundDecimal(value, decimals));
-
-		mousePosition.put();
-
 
 		super.update(elapsed);
 	}

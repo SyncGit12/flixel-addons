@@ -511,7 +511,7 @@ class FlxSliceSprite extends FlxStrip
 			renderSprite.y = y;
 			renderSprite.scale.copyFrom(scale);
 			renderSprite.scrollFactor.set(scrollFactor.x, scrollFactor.y);
-			renderSprite._cameras = _cameras;
+			renderSprite.cameras = cameras;
 			renderSprite.draw();
 		}
 		else
